@@ -1,0 +1,4 @@
+export CTRL_IP="127.0.0.1"
+export CTRL_PORT="6653"
+export DPID="1"
+export OPT_ARGS="-d4 -c1 -c2 -c3 -c4 -c5"

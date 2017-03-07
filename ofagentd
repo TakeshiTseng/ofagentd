@@ -15,10 +15,10 @@ CONFIG_FILE="/etc/ofagentapp/config"
 LOG_PATH="/var/log/ofagentapp"
 
 if [ ! -d $LOG_PATH ]; then
-    mkdir $LOG_PATH
+    mkdir -p $LOG_PATH
 fi
 
-for fn in `command ls $LOG_PATH/log.* | sort -r`; do
+for fn in `command ls $LOG_PATH | grep "log" | sort -r`; do
     num=`echo "$fn" | grep -e "\d\{1,\}$" -o`
     new_num=$((num+1))
     if [ -f "$LOG_PATH/log.$num" ]; then
@@ -30,7 +30,7 @@ if [ -f $LOG_PATH/log ]; then
     mv $LOG_PATH/log $LOG_PATH/log.1
 fi
 
-for fn in `command ls $LOG_PATH/error.* | sort -r`; do
+for fn in `command ls $LOG_PATH | grep error | sort -r`; do
     num=`echo "$fn" | grep -e "\d\{1,\}$" -o`
     new_num=$((num+1))
     if [ -f "$LOG_PATH/error.$num" ]; then
@@ -59,11 +59,12 @@ fi
 
 case "$1" in
 start)
-    launcher ofagentapp -t $CTRL_IP:$CTRL_PORT -i $DPID $OPT_ARGS > $LOG_FILE 2> $ERROR_LOG_FILE
+    launcher ofagentapp -t $CTRL_IP:$CTRL_PORT -i $DPID $OPT_ARGS > $LOG_FILE 2> $ERROR_LOG_FILE &
     ;;
 stop)
     kill -9 `echo $PID_FILE`
     ;;
 *)
-    echo "Usage /etc/init.d/ofagentd {start|stop}
+    echo "Usage /etc/init.d/ofagentd {start|stop}"
+    ;;
 esac

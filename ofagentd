@@ -81,14 +81,14 @@ start () {
     #start-stop-daemon --signal INT --start --background --exec $LAUNCH_CMD --\
     #    "-t $CTRL_IP:$CTRL_PORT -i $DPID $OPT_ARGS" > $LOG_FILE 2> $ERROR_LOG_FILE
 
-    $LAUNCH_CMD $AGENT_ARGS > $LOG_FILE 2> $ERROR_LOG_FILE &
+    $LAUNCH_CMD $AGENT_ARGS >> $LOG_FILE 2>> $ERROR_LOG_FILE &
     echo "."
 }
 
 stop () {
     echo -n "Stopping ofagent"
     [ -f $PID_FILE ] && PID=`cat $PID_FILE` && ps -eo pid | grep -q $PID \
-        && kill -9 `cat $PID_FILE`
+        && kill -15 `cat $PID_FILE`
     echo "."
 }
 

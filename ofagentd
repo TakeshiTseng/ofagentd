@@ -79,7 +79,7 @@ start () {
     # Currently we don't use start-stop-daemon because we can't get output(logs)
     # from agent.
     #start-stop-daemon --signal INT --start --background --exec $LAUNCH_CMD --\
-        "-t $CTRL_IP:$CTRL_PORT -i $DPID $OPT_ARGS" > $LOG_FILE 2> $ERROR_LOG_FILE
+    #    "-t $CTRL_IP:$CTRL_PORT -i $DPID $OPT_ARGS" > $LOG_FILE 2> $ERROR_LOG_FILE
 
     $LAUNCH_CMD $AGENT_ARGS > $LOG_FILE 2> $ERROR_LOG_FILE &
     echo "."

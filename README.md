@@ -27,14 +27,24 @@ cp config.sample /etc/ofagentapp/config
 ```
 
 
-## Start/Stop
+## Functions
 Start ofagent
 ```
-/etc/init.d/ofagentd start
+service ofagentd start
 ```
 
 Stop ofagent
 ```
-/etc/init.d/ofagentd stop
+service ofagentd stop
+```
+
+Status
+```
+service ofagentd status
+```
+
+Restart
+```
+service ofagentd restart
 ```
 

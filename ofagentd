@@ -70,11 +70,18 @@ start () {
     [ ! -z $CTRL_PORT ] || CTRL_PORT="6653"
     [ ! -z $DPID ] || DPID="1"
 
+    AGENT_ARGS="-t $CTRL_IP:$CTRL_PORT -i $DPID $OPT_ARGS"
+
     [ -f $PID_FILE ] && PID=`cat $PID_FILE` && ps -eo pid | grep -q $PID && \
         echo "Ofagent is already running" && exit 0
     echo -n "Starting ofagent"
-    start-stop-daemon --signal INT --start --background --exec $LAUNCH_CMD --\
+
+    # Currently we don't use start-stop-daemon because we can't get output(logs)
+    # from agent.
+    #start-stop-daemon --signal INT --start --background --exec $LAUNCH_CMD --\
         "-t $CTRL_IP:$CTRL_PORT -i $DPID $OPT_ARGS" > $LOG_FILE 2> $ERROR_LOG_FILE
+
+    $LAUNCH_CMD $AGENT_ARGS > $LOG_FILE 2> $ERROR_LOG_FILE &
     echo "."
 }
 

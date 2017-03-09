@@ -1,4 +1,4 @@
 CTRL_IP="127.0.0.1"
 CTRL_PORT="6653"
 DPID="1"
-OPT_ARGS="-d4 -c1 -c2 -c3 -c4 -c5"
+OPT_ARGS="-a2 -d4 -c1 -c2 -c3 -c4 -c5"
